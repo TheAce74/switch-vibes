@@ -1,10 +1,13 @@
+import { useNavigate } from "@tanstack/react-router";
 import { Button } from "#/components/ui/button";
+import { ENV } from "#/lib/schema";
 
 export function DefaultCatchBoundary({ error }: { error: Error }) {
 	console.error("Error caught by boundary:", error);
+	const navigate = useNavigate();
 
 	return (
-		<div className="flex flex-col items-center justify-center min-h-[70vh] px-4 text-center">
+		<div className="flex flex-col items-center justify-center min-h-[70vh] px-4 text-center py-8">
 			<div className="flex h-24 w-24 items-center justify-center rounded-full bg-red-50/50 mb-8 border border-red-100">
 				<svg
 					className="h-12 w-12 text-red-500"
@@ -29,8 +32,8 @@ export function DefaultCatchBoundary({ error }: { error: Error }) {
 				processing your request.
 			</p>
 
-			{process.env.NODE_ENV === "development" && (
-				<div className="mt-8 text-left w-full max-w-2xl bg-bg-input p-5 rounded-2xl overflow-auto hidden md:block border border-bg-difference-1 shadow-sm">
+			{ENV.VITE_APP_ENVIRONMENT === "dev" && (
+				<div className="mt-8 text-left w-full max-w-2xl p-5 rounded-xl overflow-auto hidden md:block border border-bg-difference-1">
 					<p className="font-mono text-sm text-red-600 break-all font-semibold">
 						Message: {error?.message || "Unknown Error"}
 					</p>
@@ -43,7 +46,7 @@ export function DefaultCatchBoundary({ error }: { error: Error }) {
 			)}
 
 			<div className="mt-10">
-				<Button variant="primary" onClick={() => window.location.assign("/")}>
+				<Button variant="primary" onClick={() => navigate({ to: "/" })}>
 					Return Home
 				</Button>
 			</div>

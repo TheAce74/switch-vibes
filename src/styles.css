@@ -147,6 +147,7 @@
 	--color-bg-difference-2: #13142b;
 	--color-bg-difference-3: #000212;
 	--color-bg-difference-4: #8f9bca;
+	--color-primary: #b09bd8;
 }
 
 * {
@@ -166,4 +167,14 @@ body {
 	color: var(--color-text);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: 200% 0;
+	}
+
+	100% {
+		background-position: -200% 0;
+	}
 }
