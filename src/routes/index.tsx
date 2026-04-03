@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import AboutSection from "#/components/about-section";
+import FaqsSection from "#/components/faqs-section";
 import HeroSection from "#/components/hero-section";
 import PerksSection from "#/components/perks-section";
 
@@ -11,6 +12,7 @@ function App() {
 			<HeroSection />
 			<AboutSection />
 			<PerksSection />
+			<FaqsSection />
 		</main>
 	);
 }
