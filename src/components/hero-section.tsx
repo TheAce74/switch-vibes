@@ -1,10 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import HeroImage from "#/assets/hero-image.png?url";
 import withErrorMessage from "#/components/hocs/with-error-message";
 import VibeSection from "#/components/layout/vibe-section";
-import MigrationDialog from "#/components/migration-dialog";
 import { Button } from "#/components/ui/button";
 import { Input } from "#/components/ui/input";
 import {
@@ -20,6 +19,8 @@ import { PLATFORM_LOGOS, PLATFORM_META, PLATFORMS } from "#/lib/constants";
 import { migrationSchema } from "#/lib/schema";
 import { cn, detectPlatform } from "#/lib/utils";
 import type { MigrationFormValues } from "#/types/client";
+
+const MigrationDialog = lazy(() => import("#/components/migration-dialog"));
 
 export default function HeroSection() {
   const { loaded: heroLoaded } = useImageLoader(HeroImage);
@@ -196,11 +197,14 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <MigrationDialog
-        open={isMigrationOpen}
-        onOpenChange={setIsMigrationOpen}
-        sourcePlatform={activeMigrationData?.platform}
-      />
+      <Suspense fallback={null}>
+        <MigrationDialog
+          open={isMigrationOpen}
+          onOpenChange={setIsMigrationOpen}
+          sourcePlatform={activeMigrationData?.platform}
+          sourceUrl={activeMigrationData?.sourceUrl}
+        />
+      </Suspense>
     </VibeSection>
   );
 }
