@@ -59,11 +59,11 @@ export default function AboutSection() {
           <div
             key={feature.id}
             className={cn(
-              "relative md:min-h-[300px] min-h-[280px] overflow-hidden rounded-3xl p-8 sm:p-10 transition-transform duration-300 hover:scale-[1.01]",
+              "relative md:min-h-75 min-h-70 overflow-hidden rounded-3xl p-8 sm:p-10 transition-transform duration-300 hover:scale-[1.01]",
               feature.bgClass,
             )}
           >
-            <div className="relative z-10 flex flex-col gap-2 md:max-w-[250px] max-w-[300px] lg:max-w-[300px]">
+            <div className="relative z-10 flex flex-col gap-2 md:max-w-62.5 max-w-75 lg:max-w-75">
               <h3 className="font-heading text-lg md:text-xl font-bold leading-tight lg:text-2xl">
                 {feature.title}
               </h3>
@@ -83,7 +83,7 @@ export default function AboutSection() {
         ))}
 
         {/* Apple Music Banner */}
-        <div className="relative md:col-span-2 min-h-[400px] overflow-hidden rounded-3xl bg-bg-difference-3 p-10 sm:p-16 flex flex-col lg:flex-row items-center justify-between gap-12 transition-transform duration-300 hover:scale-[1.005]">
+        <div className="relative md:col-span-2 min-h-100 overflow-hidden rounded-3xl bg-bg-difference-3 p-10 sm:p-16 xl:px-32 flex flex-col lg:flex-row items-center justify-between gap-12 transition-transform duration-300 hover:scale-[1.005]">
           <div className="relative z-10 flex flex-col gap-8 lg:gap-12 w-full lg:w-auto">
             <div className="flex flex-col">
               <h3 className="font-heading text-[5rem] sm:text-[7rem] lg:text-[8.5rem] font-bold leading-[0.85] tracking-tighter bg-linear-to-r from-[#5E9FF5] to-[#786CFF] bg-clip-text text-transparent">
@@ -97,7 +97,7 @@ export default function AboutSection() {
             </p>
           </div>
 
-          <div className="relative w-full aspect-square max-w-[320px] sm:max-w-[400px] md:max-w-[450px]">
+          <div className="relative w-full aspect-square max-w-[320px] sm:max-w-100 md:max-w-112.5">
             <img
               src={IllustrationApple}
               alt="Apple Music Support"
