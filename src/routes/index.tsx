@@ -15,7 +15,10 @@ function PerksSkeleton() {
       <Skeleton className="h-10 w-64 md:h-12 md:w-96" />
       <div className="grid gap-6 lg:gap-8 md:grid-cols-2 lg:grid-cols-3">
         {[1, 2, 3, 4, 5, 6].map((i) => (
-          <Skeleton key={`perk-skel-${i}`} className="h-70 w-full rounded-3xl" />
+          <Skeleton
+            key={`perk-skel-${i}`}
+            className="h-70 w-full rounded-3xl"
+          />
         ))}
       </div>
     </VibeSection>
