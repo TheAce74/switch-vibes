@@ -33,6 +33,7 @@ export default function HeroSection() {
     watch,
     setValue,
     formState: { errors },
+    reset,
   } = useForm<MigrationFormValues>({
     // Bypassing a strict type collision. Our version of @hookform/resolvers expects older Zod internal types (like _zod.version).
     // @ts-expect-error
@@ -56,6 +57,8 @@ export default function HeroSection() {
   const onSubmit = (data: MigrationFormValues) => {
     setActiveMigrationData(data);
     setIsMigrationOpen(true);
+    // delay this for visual coherence
+    setTimeout(reset, 1000);
   };
 
   return (

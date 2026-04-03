@@ -216,40 +216,44 @@ export default function MigrationDialog({
                 {step === "success" && (
                   <>
                     <Tooltip>
-                      <TooltipTrigger>
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            window.open("playlistUrl", "_blank");
-                          }}
-                          className="size-8 rounded-full bg-[#F2F2F2] flex items-center justify-center text-[#4F4F4F] hover:bg-[#E0E0E0] transition-colors cursor-pointer"
-                        >
-                          <ExternalLink className="size-5" />
-                        </button>
-                      </TooltipTrigger>
+                      <TooltipTrigger
+                        render={() => (
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.open("playlistUrl", "_blank");
+                            }}
+                            className="size-8 rounded-full bg-[#F2F2F2] flex items-center justify-center text-[#4F4F4F] hover:bg-[#E0E0E0] transition-colors cursor-pointer"
+                          >
+                            <ExternalLink className="size-5" />
+                          </button>
+                        )}
+                      />
                       <TooltipContent>Open Playlist</TooltipContent>
                     </Tooltip>
 
                     <Tooltip>
-                      <TooltipTrigger>
-                        <button
-                          type="button"
-                          onClick={async (e) => {
-                            e.stopPropagation();
-                            const [success, message] =
-                              await copyToClipboard("playlistUrl");
-                            if (success) {
-                              toast.success(message);
-                            } else {
-                              toast.error(message);
-                            }
-                          }}
-                          className="size-8 rounded-full bg-[#F2F2F2] flex items-center justify-center text-[#4F4F4F] hover:bg-[#E0E0E0] transition-colors cursor-pointer"
-                        >
-                          <Copy className="size-5" />
-                        </button>
-                      </TooltipTrigger>
+                      <TooltipTrigger
+                        render={() => (
+                          <button
+                            type="button"
+                            onClick={async (e) => {
+                              e.stopPropagation();
+                              const [success, message] =
+                                await copyToClipboard("playlistUrl");
+                              if (success) {
+                                toast.success(message);
+                              } else {
+                                toast.error(message);
+                              }
+                            }}
+                            className="size-8 rounded-full bg-[#F2F2F2] flex items-center justify-center text-[#4F4F4F] hover:bg-[#E0E0E0] transition-colors cursor-pointer"
+                          >
+                            <Copy className="size-5" />
+                          </button>
+                        )}
+                      />
                       <TooltipContent>Copy Link</TooltipContent>
                     </Tooltip>
                   </>
@@ -280,9 +284,9 @@ export default function MigrationDialog({
                   {step !== "selecting" && (
                     <div className="px-4 pb-4">
                       <div className="h-60 overflow-y-auto pr-2 custom-scrollbar">
-                        <div className="space-y-4 pt-4">
+                        <ul className="space-y-4 pt-4">
                           {MOCK_TRACKS.map((track) => (
-                            <div
+                            <li
                               key={track.id}
                               className="flex flex-wrap items-center gap-4"
                             >
@@ -303,9 +307,9 @@ export default function MigrationDialog({
                                   {track.artist}
                                 </span>
                               </div>
-                            </div>
+                            </li>
                           ))}
-                        </div>
+                        </ul>
                       </div>
                     </div>
                   )}
@@ -334,19 +338,21 @@ export default function MigrationDialog({
 
                     return (
                       <Tooltip key={platform}>
-                        <TooltipTrigger>
-                          <Button
-                            variant="brand"
-                            brandLogoUrl={PLATFORM_LOGOS[platform]}
-                            onClick={() =>
-                              !isDisabled && setTargetPlatform(platform)
-                            }
-                            disabled={isDisabled}
-                            className={cn(
-                              isSelected && "border-[#FF99CC] ring-[#FF99CC]",
-                            )}
-                          />
-                        </TooltipTrigger>
+                        <TooltipTrigger
+                          render={() => (
+                            <Button
+                              variant="brand"
+                              brandLogoUrl={PLATFORM_LOGOS[platform]}
+                              onClick={() =>
+                                !isDisabled && setTargetPlatform(platform)
+                              }
+                              disabled={isDisabled}
+                              className={cn(
+                                isSelected && "border-[#FF99CC] ring-[#FF99CC]",
+                              )}
+                            />
+                          )}
+                        />
                         <TooltipContent>
                           {isDisabled ? meta.disabledReason : meta.label}
                         </TooltipContent>
