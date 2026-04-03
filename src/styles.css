@@ -169,6 +169,14 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.preserve-3d {
+	transform-style: preserve-3d;
+}
+
+.backface-hidden {
+	backface-visibility: hidden;
+}
+
 @keyframes shimmer {
 	0% {
 		background-position: 200% 0;
