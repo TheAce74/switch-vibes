@@ -6,11 +6,11 @@ import PerksSection from "#/components/perks-section";
 export const Route = createFileRoute("/")({ component: App });
 
 function App() {
-  return (
-    <main>
-      <HeroSection />
-      <AboutSection />
-      <PerksSection />
-    </main>
-  );
+	return (
+		<main>
+			<HeroSection />
+			<AboutSection />
+			<PerksSection />
+		</main>
+	);
 }
