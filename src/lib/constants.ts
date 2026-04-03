@@ -6,26 +6,26 @@ import type { Platform } from "#/types/client";
 export const PLATFORMS = ["spotify", "youtube-music", "apple-music"] as const;
 
 export const PLATFORM_META: Record<
-	Platform,
-	{ label: string; disabled: boolean; disabledReason?: string }
+  Platform,
+  { label: string; disabled: boolean; disabledReason?: string }
 > = {
-	spotify: { label: "Spotify", disabled: false },
-	"youtube-music": { label: "YouTube Music", disabled: false },
-	"apple-music": {
-		label: "Apple Music",
-		disabled: true,
-		disabledReason: "Apple Music is not yet supported",
-	},
+  spotify: { label: "Spotify", disabled: false },
+  "youtube-music": { label: "YouTube Music", disabled: false },
+  "apple-music": {
+    label: "Apple Music",
+    disabled: true,
+    disabledReason: "Apple Music is not yet supported",
+  },
 };
 
 export const PLATFORM_LOGOS: Record<Platform, string> = {
-	spotify: SpotifyLogo,
-	"youtube-music": YTMusicLogo,
-	"apple-music": AppleMusicLogo,
+  spotify: SpotifyLogo,
+  "youtube-music": YTMusicLogo,
+  "apple-music": AppleMusicLogo,
 };
 
 export const URL_PATTERNS: Record<Platform, RegExp> = {
-	spotify: /open\.spotify\.com/i,
-	"youtube-music": /music\.youtube\.com/i,
-	"apple-music": /music\.apple\.com/i,
+  spotify: /open\.spotify\.com/i,
+  "youtube-music": /music\.youtube\.com/i,
+  "apple-music": /music\.apple\.com/i,
 };
