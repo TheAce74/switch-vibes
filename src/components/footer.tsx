@@ -1,3 +1,4 @@
+import { Github } from "lucide-react";
 import Logo from "#/assets/logo.svg?url";
 
 const NAV_LINKS = [
@@ -53,8 +54,9 @@ export default function Footer() {
                   href={repo.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-medium text-[#92989F] transition-colors hover:text-foreground focus-visible:text-foreground"
+                  className="flex items-center gap-1.5 text-xs font-medium text-[#92989F] transition-colors hover:text-foreground focus-visible:text-foreground hover:underline underline-offset-4"
                 >
+                  <Github className="size-3.5 shrink-0" />
                   {repo.label}
                 </a>
                 {i < GITHUB_REPOS.length - 1 && (

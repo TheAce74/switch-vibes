@@ -4,6 +4,8 @@ import { detectPlatform } from "#/lib/utils";
 
 export const envSchema = z.object({
   VITE_APP_ENVIRONMENT: z.enum(["dev", "prod"]),
+  VITE_APP_SOCKETS_BASE_URL: z.string(),
+  VITE_APP_API_BASE_URL: z.string(),
 });
 
 export const ENV = envSchema.parse(import.meta.env);

@@ -1,4 +1,5 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { DefaultCatchBoundary } from "#/components/default-catch-boundary";
@@ -7,6 +8,8 @@ import { NotFound } from "#/components/not-found";
 import { TooltipProvider } from "#/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
 import appCss from "../styles.css?url";
+
+const queryClient = new QueryClient();
 
 export const Route = createRootRoute({
   head: () => ({
@@ -114,7 +117,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body className="font-sans antialiased wrap-anywhere">
         <Header />
-        <TooltipProvider>{children}</TooltipProvider>
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>{children}</TooltipProvider>
+        </QueryClientProvider>
         <Toaster richColors position="top-right" />
         <TanStackDevtools
           config={{
