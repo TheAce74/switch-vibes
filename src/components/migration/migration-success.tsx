@@ -139,7 +139,10 @@ export function MigrationSuccess({
                   render={
                     <button
                       type="button"
-                      onClick={() => window.open(finalResult.link, "_blank")}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.open(finalResult.link, "_blank");
+                      }}
                       className="size-8 rounded-full bg-[#F2F2F2] flex items-center justify-center text-[#4F4F4F] hover:bg-[#E0E0E0] transition-colors cursor-pointer"
                     >
                       <ExternalLink className="size-5" />
@@ -154,7 +157,8 @@ export function MigrationSuccess({
                   render={
                     <button
                       type="button"
-                      onClick={async () => {
+                      onClick={async (e) => {
+                        e.stopPropagation();
                         const [success, message] = await copyToClipboard(
                           finalResult.link,
                         );
