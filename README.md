@@ -14,6 +14,9 @@ Whether you're moving from Spotify to Apple Music, or YouTube Music to Spotify, 
 - **Framework**: [TanStack Start](https://tanstack.com/start/latest) (React 19)
 - **Routing**: [TanStack Router](https://tanstack.com/router/latest)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com) & [shadcn/ui](https://ui.shadcn.com)
+- **Animation**: [Motion](https://motion.dev) & [Lottie React](https://github.com/Gamote/lottie-react)
+- **Forms**: [React Hook Form](https://react-hook-form.com)
+- **Data Fetching**: [Axios](https://axios-http.com) & [TanStack Query](https://tanstack.com/query/latest)
 - **Validation**: [Zod](https://zod.dev)
 - **Tooling**: [Vite](https://vitejs.dev), [Biome](https://biomejs.dev), and [Husky](https://typicode.github.io/husky/).
 
