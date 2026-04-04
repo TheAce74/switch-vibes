@@ -214,44 +214,40 @@ export default function MigrationDialog({
                   {step === "success" && (
                     <>
                       <Tooltip>
-                        <TooltipTrigger
-                          render={() => (
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                window.open("playlistUrl", "_blank");
-                              }}
-                              className="size-8 rounded-full bg-[#F2F2F2] flex items-center justify-center text-[#4F4F4F] hover:bg-[#E0E0E0] transition-colors cursor-pointer"
-                            >
-                              <ExternalLink className="size-5" />
-                            </button>
-                          )}
-                        />
+                        <TooltipTrigger>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.open("playlistUrl", "_blank");
+                            }}
+                            className="size-8 rounded-full bg-[#F2F2F2] flex items-center justify-center text-[#4F4F4F] hover:bg-[#E0E0E0] transition-colors cursor-pointer"
+                          >
+                            <ExternalLink className="size-5" />
+                          </button>
+                        </TooltipTrigger>
                         <TooltipContent>Open Playlist</TooltipContent>
                       </Tooltip>
 
                       <Tooltip>
-                        <TooltipTrigger
-                          render={() => (
-                            <button
-                              type="button"
-                              onClick={async (e) => {
-                                e.stopPropagation();
-                                const [success, message] =
-                                  await copyToClipboard("playlistUrl");
-                                if (success) {
-                                  toast.success(message);
-                                } else {
-                                  toast.error(message);
-                                }
-                              }}
-                              className="size-8 rounded-full bg-[#F2F2F2] flex items-center justify-center text-[#4F4F4F] hover:bg-[#E0E0E0] transition-colors cursor-pointer"
-                            >
-                              <Copy className="size-5" />
-                            </button>
-                          )}
-                        />
+                        <TooltipTrigger>
+                          <button
+                            type="button"
+                            onClick={async (e) => {
+                              e.stopPropagation();
+                              const [success, message] =
+                                await copyToClipboard("playlistUrl");
+                              if (success) {
+                                toast.success(message);
+                              } else {
+                                toast.error(message);
+                              }
+                            }}
+                            className="size-8 rounded-full bg-[#F2F2F2] flex items-center justify-center text-[#4F4F4F] hover:bg-[#E0E0E0] transition-colors cursor-pointer"
+                          >
+                            <Copy className="size-5" />
+                          </button>
+                        </TooltipTrigger>
                         <TooltipContent>Copy Link</TooltipContent>
                       </Tooltip>
                     </>
@@ -333,21 +329,19 @@ export default function MigrationDialog({
 
                     return (
                       <Tooltip key={platform}>
-                        <TooltipTrigger
-                          render={() => (
-                            <Button
-                              variant="brand"
-                              brandLogoUrl={PLATFORM_LOGOS[platform]}
-                              onClick={() =>
-                                !isDisabled && setTargetPlatform(platform)
-                              }
-                              disabled={isDisabled}
-                              className={cn(
-                                isSelected && "border-[#FF99CC] ring-[#FF99CC]",
-                              )}
-                            />
-                          )}
-                        />
+                        <TooltipTrigger>
+                          <Button
+                            variant="brand"
+                            brandLogoUrl={PLATFORM_LOGOS[platform]}
+                            onClick={() =>
+                              !isDisabled && setTargetPlatform(platform)
+                            }
+                            disabled={isDisabled}
+                            className={cn(
+                              isSelected && "border-[#FF99CC] ring-[#FF99CC]",
+                            )}
+                          />
+                        </TooltipTrigger>
                         <TooltipContent>
                           {isDisabled ? meta.disabledReason : meta.label}
                         </TooltipContent>
