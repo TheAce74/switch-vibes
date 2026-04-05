@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import VibeSection from "#/components/layout/vibe-section";
 import {
   Accordion,
@@ -30,26 +31,43 @@ export default function FaqsSection() {
   return (
     <VibeSection id="faqs" className="flex flex-col md:gap-2">
       {/* Heading */}
-      <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold tracking-tighter uppercase lg:text-5xl text-foreground">
+      <motion.h2
+        initial={{ y: -20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold tracking-tighter uppercase lg:text-5xl text-foreground"
+      >
         Faqs
-      </h2>
+      </motion.h2>
 
       {/* Accordion List */}
       <div className="w-full max-w-5xl">
         <Accordion className="w-full">
-          {FAQ_ITEMS.map((faq) => (
-            <AccordionItem
+          {FAQ_ITEMS.map((faq, index) => (
+            <motion.div
               key={faq.question}
-              value={faq.question}
-              className="border-b border-border py-4 lg:py-6 last:border-b-0"
+              initial={{ y: 30, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.1,
+                ease: "easeOut",
+              }}
             >
-              <AccordionTrigger className="text-left text-base md:text-lg lg:text-xl font-semibold hover:no-underline py-4">
-                {faq.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground md:text-base lg:text-lg leading-relaxed pt-2 pb-6 pr-8">
-                {faq.answer}
-              </AccordionContent>
-            </AccordionItem>
+              <AccordionItem
+                value={faq.question}
+                className="border-b border-border py-4 lg:py-6 last:border-b-0"
+              >
+                <AccordionTrigger className="text-left text-base md:text-lg lg:text-xl font-semibold hover:no-underline py-4">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground md:text-base lg:text-lg leading-relaxed pt-2 pb-6 pr-8">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            </motion.div>
           ))}
         </Accordion>
       </div>

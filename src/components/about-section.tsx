@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import Illustration1 from "#/assets/about-illustration-1.svg?url";
 import Illustration2 from "#/assets/about-illustration-2.svg?url";
 import Illustration3 from "#/assets/about-illustration-3.svg?url";
@@ -49,14 +50,28 @@ export default function AboutSection() {
   return (
     <VibeSection id="about" className="flex flex-col gap-6 md:gap-10">
       {/* Heading */}
-      <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight lg:text-5xl">
+      <motion.h2
+        initial={{ x: -50, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight lg:text-5xl"
+      >
         What Sets Us Apart
-      </h2>
+      </motion.h2>
 
       {/* Features Grid */}
       <ul className="grid gap-6 lg:gap-8 md:grid-cols-2">
-        {SMALL_FEATURES.map((feature) => (
-          <li
+        {SMALL_FEATURES.map((feature, index) => (
+          <motion.li
+            initial={{ x: index % 2 === 0 ? -40 : 40, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.7,
+              delay: index * 0.1,
+              ease: "easeOut",
+            }}
             key={feature.id}
             className={cn(
               "relative md:min-h-75 min-h-70 overflow-hidden rounded-3xl p-8 sm:p-10 transition-transform duration-300 hover:scale-[1.01]",
@@ -79,32 +94,61 @@ export default function AboutSection() {
                 feature.imgClass,
               )}
             />
-          </li>
+          </motion.li>
         ))}
 
         {/* Apple Music Banner */}
-        <li className="relative md:col-span-2 min-h-100 overflow-hidden rounded-3xl bg-bg-difference-3 p-10 sm:p-16 xl:px-32 flex flex-col lg:flex-row items-center justify-between gap-12 transition-transform duration-300 hover:scale-[1.005]">
+        <motion.li
+          initial={{ y: 60, opacity: 0, rotateX: -10 }}
+          whileInView={{ y: 0, opacity: 1, rotateX: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="relative md:col-span-2 min-h-100 overflow-hidden rounded-3xl bg-bg-difference-3 p-10 sm:p-16 xl:px-32 flex flex-col lg:flex-row items-center justify-between gap-12 transition-transform duration-300 hover:scale-[1.005]"
+        >
           <div className="relative z-10 flex flex-col gap-8 lg:gap-12 w-full lg:w-auto">
             <div className="flex flex-col">
-              <h3 className="font-heading text-[5rem] sm:text-[7rem] lg:text-[8.5rem] font-bold leading-[0.85] tracking-tighter bg-linear-to-r from-[#5E9FF5] to-[#786CFF] bg-clip-text text-transparent">
+              <motion.h3
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="font-heading text-[5rem] sm:text-[7rem] lg:text-[8.5rem] font-bold leading-[0.85] tracking-tighter bg-linear-to-r from-[#5E9FF5] to-[#786CFF] bg-clip-text text-transparent"
+              >
                 Apple
                 <br />
                 Music
-              </h3>
+              </motion.h3>
             </div>
-            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-bg-difference-4">
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-bg-difference-4"
+            >
               Coming soon
-            </p>
+            </motion.p>
           </div>
 
-          <div className="relative w-full aspect-square max-w-[320px] sm:max-w-100 md:max-w-112.5">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5, rotate: -15 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              type: "spring",
+              stiffness: 70,
+              damping: 10,
+              delay: 0.6,
+            }}
+            className="relative w-full aspect-square max-w-[320px] sm:max-w-100 md:max-w-112.5"
+          >
             <img
               src={IllustrationApple}
               alt="Apple Music Support"
               className="h-full w-full object-contain drop-shadow-2xl"
             />
-          </div>
-        </li>
+          </motion.div>
+        </motion.li>
       </ul>
     </VibeSection>
   );

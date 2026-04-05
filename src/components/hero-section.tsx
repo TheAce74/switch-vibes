@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "motion/react";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import HeroImage from "#/assets/hero-image.png?url";
@@ -68,18 +69,34 @@ export default function HeroSection() {
         <div className="flex flex-col gap-6 sm:gap-8 max-lg:items-center max-lg:text-center">
           {/* Heading */}
           <div className="flex flex-col gap-1 sm:gap-2">
-            <h1 className="font-heading text-[2.75rem] font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-[5.25rem] xl:text-[5.5rem]">
+            <motion.h1
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="font-heading text-[2.75rem] font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-[5.25rem] xl:text-[5.5rem]"
+            >
               Switch
               <br />
               the Vibe
-            </h1>
-            <p className="max-w-sm text-base text-muted-foreground sm:text-lg">
+            </motion.h1>
+            <motion.p
+              initial={{ x: -30, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              className="max-w-sm text-base text-muted-foreground sm:text-lg"
+            >
               Transfer, sync &amp; move your music library
-            </p>
+            </motion.p>
           </div>
 
           {/* Migration form */}
-          <form
+          <motion.form
+            initial={{ x: 30, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
             onSubmit={handleSubmit(onSubmit)}
             className="flex w-full max-w-md flex-col gap-12"
           >
@@ -173,10 +190,21 @@ export default function HeroSection() {
             >
               Convert
             </Button>
-          </form>
+          </motion.form>
         </div>
 
-        <div className="relative flex items-center justify-center lg:justify-end">
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{
+            type: "spring",
+            stiffness: 100,
+            damping: 15,
+            delay: 0.6,
+          }}
+          className="relative flex items-center justify-center lg:justify-end"
+        >
           {!heroLoaded && (
             <div className="flex w-full items-center justify-center xl:my-25.5 lg:my-[88.5px]">
               <div className="flex w-full max-w-175 items-center justify-center -space-x-8 sm:-space-x-10">
@@ -194,7 +222,7 @@ export default function HeroSection() {
               heroLoaded ? "opacity-100" : "opacity-0 absolute",
             )}
           />
-        </div>
+        </motion.div>
       </div>
 
       <Suspense fallback={null}>

@@ -80,15 +80,24 @@ export default function PerksSection() {
   return (
     <VibeSection id="perks" className="flex flex-col gap-6 md:gap-10">
       {/* Heading */}
-      <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight lg:text-5xl text-foreground">
+      <motion.h2
+        initial={{ y: 30, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight lg:text-5xl text-foreground"
+      >
         Why Choose Switch Vibes
-      </h2>
+      </motion.h2>
 
       {/* Grid */}
       <ul className="grid gap-6 lg:gap-8 md:grid-cols-2 lg:grid-cols-3">
         {PERKS.map((perk) => (
           <li key={perk.id} className="relative h-70">
             <motion.div
+              initial={{ scale: 0.7, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true }}
               layoutId={`card-outer-${perk.id}`}
               onClick={() => setSelectedId(perk.id)}
               transition={transition}
