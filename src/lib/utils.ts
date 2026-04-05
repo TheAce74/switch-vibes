@@ -30,7 +30,7 @@ export const copyToClipboard = async (
     return await navigator.clipboard.writeText(text).then(
       () => [true, "Copied to clipboard successfully."],
       (err) => {
-        console.error(err);
+        logger(err);
         return [false, "Failed to copy"];
       },
     );
@@ -50,7 +50,7 @@ export const copyToClipboard = async (
         return [false, "Failed to copy"];
       }
     } catch (err) {
-      console.error(err);
+      logger(err);
       return [false, "Failed to copy"];
     } finally {
       document.body.removeChild(textArea);
