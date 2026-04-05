@@ -93,6 +93,8 @@ export default function AboutSection() {
                 "absolute object-contain pointer-events-none xl:w-[40%] bottom-0 right-0",
                 feature.imgClass,
               )}
+              loading="lazy"
+              decoding="async"
             />
           </motion.li>
         ))}
@@ -146,6 +148,8 @@ export default function AboutSection() {
               src={IllustrationApple}
               alt="Apple Music Support"
               className="h-full w-full object-contain drop-shadow-2xl"
+              loading="lazy"
+              decoding="async"
             />
           </motion.div>
         </motion.li>

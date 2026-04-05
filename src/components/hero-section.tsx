@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "motion/react";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import HeroImage from "#/assets/hero-image.png?url";
+import HeroImage from "#/assets/hero-image.webp";
 import withErrorMessage from "#/components/hocs/with-error-message";
 import VibeSection from "#/components/layout/vibe-section";
 import { Button } from "#/components/ui/button";
@@ -221,6 +221,9 @@ export default function HeroSection() {
               "w-full max-w-175 object-contain transition-opacity duration-500",
               heroLoaded ? "opacity-100" : "opacity-0 absolute",
             )}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
           />
         </motion.div>
       </div>

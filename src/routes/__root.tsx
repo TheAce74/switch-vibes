@@ -1,8 +1,7 @@
-import { TanStackDevtools } from "@tanstack/react-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { lazy, Suspense } from "react";
+import HeroImage from "#/assets/hero-image.webp";
 import { DefaultCatchBoundary } from "#/components/default-catch-boundary";
 import Header from "#/components/header";
 import { NotFound } from "#/components/not-found";
@@ -13,6 +12,22 @@ import appCss from "../styles.css?url";
 const PWAInstallTrigger = lazy(
   () => import("#/components/pwa-install-trigger"),
 );
+
+const TanStackDevtools = import.meta.env.DEV
+  ? lazy(() =>
+      import("@tanstack/react-devtools").then((res) => ({
+        default: res.TanStackDevtools,
+      })),
+    )
+  : () => null;
+
+const TanStackRouterDevtoolsPanel = import.meta.env.DEV
+  ? lazy(() =>
+      import("@tanstack/react-router-devtools").then((res) => ({
+        default: res.TanStackRouterDevtoolsPanel,
+      })),
+    )
+  : () => null;
 
 const queryClient = new QueryClient();
 
@@ -107,6 +122,13 @@ export const Route = createRootRoute({
         rel: "stylesheet",
         href: appCss,
       },
+      {
+        rel: "preload",
+        as: "image",
+        href: HeroImage,
+        type: "image/webp",
+        fetchpriority: "high",
+      },
     ],
   }),
   errorComponent: DefaultCatchBoundary,
@@ -129,17 +151,19 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           <PWAInstallTrigger />
         </Suspense>
         <Toaster richColors position="top-right" />
-        <TanStackDevtools
-          config={{
-            position: "bottom-left",
-          }}
-          plugins={[
-            {
-              name: "Tanstack Router",
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        />
+        <Suspense fallback={null}>
+          <TanStackDevtools
+            config={{
+              position: "bottom-left",
+            }}
+            plugins={[
+              {
+                name: "Tanstack Router",
+                render: <TanStackRouterDevtoolsPanel />,
+              },
+            ]}
+          />
+        </Suspense>
         <Scripts />
       </body>
     </html>
