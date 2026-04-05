@@ -17,7 +17,6 @@ const config = defineConfig({
     viteReact(),
     VitePWA({
       registerType: "autoUpdate",
-      injectRegister: "auto",
       includeAssets: ["favicon.ico", "apple-touch-icon.png", "robots.txt"],
       manifest: {
         name: "SwitchVibes | Seamless Playlist Migration",
@@ -50,7 +49,8 @@ const config = defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
+        globPatterns: ["**/*.{js,css,ico,png,svg,woff2}"],
+        navigateFallback: "/",
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -66,7 +66,25 @@ const config = defineConfig({
               },
             },
           },
+          {
+            urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "gstatic-fonts-cache",
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 365, // <== 365 days
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
         ],
+      },
+      devOptions: {
+        enabled: true,
+        type: "module",
       },
     }),
   ],
