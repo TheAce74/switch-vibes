@@ -2,8 +2,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useMigrateSpotifyToYT } from "#/hooks/use-migrate-spotify-to-yt";
 import { useMigrateYTToSpotify } from "#/hooks/use-migrate-yt-to-spotify";
+import {
+  requestNotificationPermission,
+  sendLocalNotification,
+} from "#/lib/notifications";
 import { ENV } from "#/lib/schema";
-import { requestNotificationPermission, sendLocalNotification } from "#/lib/notifications";
 import { logger } from "#/lib/utils";
 import type { Platform } from "#/types/client";
 import type {
@@ -78,7 +81,7 @@ export function useMigration(
       updateStatus("success");
       sendLocalNotification(
         "Migration Complete! 🎉",
-        "Successfully migrated to Spotify (via Channel 2)."
+        "Successfully migrated to Spotify (via Channel 2).",
       );
     },
     (err) => {
@@ -86,7 +89,7 @@ export function useMigration(
       updateStatus("error");
       sendLocalNotification(
         "Migration Failed ❌",
-        err.detail || "Something went wrong during migration."
+        err.detail || "Something went wrong during migration.",
       );
     },
   );
@@ -98,7 +101,7 @@ export function useMigration(
       updateStatus("success");
       sendLocalNotification(
         "Migration Complete! 🎉",
-        "Successfully migrated to YouTube Music (via Channel 2)."
+        "Successfully migrated to YouTube Music (via Channel 2).",
       );
     },
     (err) => {
@@ -106,7 +109,7 @@ export function useMigration(
       updateStatus("error");
       sendLocalNotification(
         "Migration Failed ❌",
-        err.detail || "Something went wrong during migration."
+        err.detail || "Something went wrong during migration.",
       );
     },
   );
@@ -175,7 +178,7 @@ export function useMigration(
           updateStatus("success");
           sendLocalNotification(
             "Migration Complete! 🎉",
-            `Successfully migrated to ${targetPlatform === "spotify" ? "Spotify" : "YouTube Music"}.`
+            `Successfully migrated to ${targetPlatform === "spotify" ? "Spotify" : "YouTube Music"}.`,
           );
           socket.close();
           return;
