@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { useMigrateSpotifyToYT } from "#/hooks/use-migrate-spotify-to-yt";
 import { useMigrateYTToSpotify } from "#/hooks/use-migrate-yt-to-spotify";
 import { ENV } from "#/lib/schema";
+import { requestNotificationPermission, sendLocalNotification } from "#/lib/notifications";
 import { logger } from "#/lib/utils";
 import type { Platform } from "#/types/client";
 import type {
@@ -75,10 +76,18 @@ export function useMigration(
       setFinalResult(data);
       setTracks(data.spotify_playlist);
       updateStatus("success");
+      sendLocalNotification(
+        "Migration Complete! 🎉",
+        "Successfully migrated to Spotify (via Channel 2)."
+      );
     },
     (err) => {
       toast.error(err.detail || "Migration Failed");
       updateStatus("error");
+      sendLocalNotification(
+        "Migration Failed ❌",
+        err.detail || "Something went wrong during migration."
+      );
     },
   );
 
@@ -87,10 +96,18 @@ export function useMigration(
       setFinalResult(data);
       setTracks(data.yt_playlist);
       updateStatus("success");
+      sendLocalNotification(
+        "Migration Complete! 🎉",
+        "Successfully migrated to YouTube Music (via Channel 2)."
+      );
     },
     (err) => {
       toast.error(err.detail || "Migration Failed");
       updateStatus("error");
+      sendLocalNotification(
+        "Migration Failed ❌",
+        err.detail || "Something went wrong during migration."
+      );
     },
   );
 
@@ -119,7 +136,10 @@ export function useMigration(
     setFinalResult(null);
   }, [updateStatus]);
 
-  const startMigration = (sourceUrl: string) => {
+  const startMigration = async (sourceUrl: string) => {
+    // Request permission during user gesture
+    await requestNotificationPermission();
+
     if (!migrationType || !targetPlatform) {
       toast.error("Invalid migration path selected.");
       return;
@@ -153,6 +173,10 @@ export function useMigration(
           setFinalResult(data);
           setTracks(data.playlist);
           updateStatus("success");
+          sendLocalNotification(
+            "Migration Complete! 🎉",
+            `Successfully migrated to ${targetPlatform === "spotify" ? "Spotify" : "YouTube Music"}.`
+          );
           socket.close();
           return;
         }
@@ -183,6 +207,7 @@ export function useMigration(
         if ("detail" in data && "code" in data) {
           toast.error(data.detail);
           updateStatus("error");
+          sendLocalNotification("Migration Failed ❌", data.detail);
           socket.close();
         }
       } catch (err) {
